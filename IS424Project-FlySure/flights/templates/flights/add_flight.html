@@ -1,0 +1,25 @@
+{% extends "flights/base.html" %}
+{% block title %}Add Flight{% endblock %}
+{% block content %}
+<h2>Add Flight</h2>
+<form method="post" id="addFlightForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Flight</button>
+</form>
+<a href="{% url 'flights_list' %}" class="btn btn-secondary">Back to Flights</a>
+
+<script>
+    document.getElementById("addFlightForm").addEventListener("submit", function(event) {
+        const airlineInput = document.getElementById("id_airline");
+        const airlineValue = airlineInput.value;
+
+        const alphabetRegex = /^[A-Za-z\s]+$/;
+
+        if (!alphabetRegex.test(airlineValue)) {
+            alert("The airline field must contain only alphabetic characters.");
+            event.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

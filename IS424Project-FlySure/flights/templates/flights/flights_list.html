@@ -1,0 +1,33 @@
+{% extends "flights/base.html" %}
+{% block title %}Flights{% endblock %}
+{% block content %}
+<h2>Flights</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight.origin }}</td>
+            <td>{{ flight.destination }}</td>
+            <td>{{ flight.duration }}</td>
+            <td>${{ flight.price }}</td>
+            <td>
+                <a href="{% url 'flight_detail' flight.id %}" class="btn btn-info">View</a>
+                {% if user.is_superuser %}
+                <a href="{% url 'edit_flight' flight.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'delete_flight' flight.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

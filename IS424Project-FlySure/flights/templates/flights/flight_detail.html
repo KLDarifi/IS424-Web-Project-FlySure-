@@ -1,0 +1,26 @@
+{% extends "flights/base.html" %}
+{% block title %}Flight Details{% endblock %}
+{% block content %}
+<h2>Flight Details</h2>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Origin:</strong> {{ flight.origin }}</li>
+    <li class="list-group-item"><strong>Destination:</strong> {{ flight.destination }}</li>
+    <li class="list-group-item"><strong>Duration:</strong> {{ flight.duration }} minutes</li>
+    <li class="list-group-item"><strong>Price:</strong> ${{ flight.price }}</li>
+    <li class="list-group-item"><strong>Departure Time:</strong> {{ flight.departure_time }}</li>
+    <li class="list-group-item"><strong>Arrival Time:</strong> {{ flight.arrival_time }}</li>
+    <li class="list-group-item"><strong>Airline:</strong> {{ flight.airline }}</li>
+</ul>
+
+{% if already_booked %}
+    <p class="text-success mt-3">You have already booked this flight.</p>
+{% else %}
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Book This Flight</button>
+    </form>
+{% endif %}
+
+<a href="{% url 'flights_list' %}" class="btn btn-secondary mt-3">Back to Flights</a>
+{% endblock %}

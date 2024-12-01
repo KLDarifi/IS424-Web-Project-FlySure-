@@ -1,0 +1,14 @@
+{% extends "flights/base.html" %}
+{% block title %}My Booked Flights{% endblock %}
+{% block content %}
+<h1>My Booked Flights</h1>
+{% if flights %}
+<ul>
+    {% for flight in flights %}
+    <li>{{ flight.origin.city }} → {{ flight.destination.city }} on {{ flight.departure_time|date:"D M d, Y h:i A" }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>You have not booked any flights yet.</p>
+{% endif %}
+{% endblock %}
